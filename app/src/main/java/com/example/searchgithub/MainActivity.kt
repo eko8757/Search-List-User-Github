@@ -39,8 +39,8 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView.layoutManager = userLinearLayout
+        setListener()
     }
-
     override fun showLoading() {
         loadingLayout.visible()
     }
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), MainView {
         loadingLayout.gone()
     }
 
-    override fun setListener() {
+    private fun setListener() {
         recyclerView.addOnScrollListener(object : PaginationListener(userLinearLayout) {
             override fun onLoadMore(current_page: Int) {
                 if (nextPage) {
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun clearListData() {
         if (adapter != null) {
-            errorLayout.visible()
+            errorLayout.gone()
             queryCurrent = ""
             totalPage = 0
             currentPage = 1
@@ -131,8 +131,6 @@ class MainActivity : AppCompatActivity(), MainView {
 
             queryCurrent = q
         }
-
-
     }
 
     private val handlerSearch = Runnable {
@@ -214,7 +212,7 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     override fun handleNotFound(c: String, m: String) {
-        errorLayout.gone()
+        errorLayout.visible()
         textCode.text = c
         textDescription.text = m
     }

@@ -17,10 +17,6 @@ interface MainView {
         return
     }
 
-    fun setListener() {
-        return
-    }
-
     fun showData(data: List<Item>, q: String) {
         return
     }
